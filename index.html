@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vagas de TI no Sudoeste do Paraná | Sudoeste Tech</title>
+<meta name="description" content="Vagas de TI em Francisco Beltrão, Pato Branco e região, reunidas pela Sudoeste Tech. Estágio e efetivo, com o link oficial de cada vaga.">
+<meta name="theme-color" content="#0B1F3A">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<!-- Prévia do link no WhatsApp e redes sociais.
+     Troque ENDERECO-DO-SITE pelo endereço real do site (veja o README). -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Sudoeste Tech">
+<meta property="og:title" content="Vagas de TI no Sudoeste do Paraná | Sudoeste Tech">
+<meta property="og:description" content="Vagas de TI em Francisco Beltrão, Pato Branco e região, num lugar só, com o link oficial de cada vaga.">
+<meta property="og:url" content="https://ENDERECO-DO-SITE/">
+<meta property="og:image" content="https://ENDERECO-DO-SITE/img/previa.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sudoeste Tech: vagas de TI no Sudoeste do Paraná">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="img/logo.svg" type="image/svg+xml">
+<link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="preload" href="fontes/montserrat.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+<header class="topo">
+  <div class="conteudo">
+    <a class="marca" href="./">
+      <img src="img/logo.svg" alt="" width="40" height="40">
+      <span>
+        <span class="marca-nome">Sudoeste Tech</span>
+        <span class="marca-perfil">@sudoestetechpr</span>
+      </span>
+    </a>
+    <nav class="topo-links" aria-label="Links">
+      <a class="link-seta link-claro so-computador" href="https://docs.google.com/forms/d/e/1FAIpQLSdrJC9svuXizVMNhkHapBApEBNYe-bqqFJYwQx15sDE28wVZw/viewform" target="_blank" rel="noopener noreferrer">Tem vaga? Envie aqui</a>
+      <a class="link-seta" href="https://www.instagram.com/sudoestetechpr/" target="_blank" rel="noopener noreferrer">Instagram<svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="conteudo abertura">
+    <span class="sobretitulo">Sudoeste do Paraná</span>
+    <h1>Vagas de TI em Francisco Beltrão, Pato Branco e região</h1>
+    <p class="resumo" id="resumo" aria-live="polite"></p>
+  </section>
+
+  <section class="conteudo" aria-label="Busca e filtros">
+    <form class="filtros" id="form-busca" role="search">
+      <div class="campo campo-busca">
+        <label for="busca" class="sr-only">Buscar vagas</label>
+        <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="busca" type="search" placeholder="Cargo, empresa ou tecnologia" autocomplete="off" enterkeyhint="search">
+      </div>
+      <div class="tipos" role="group" aria-label="Tipo de vaga">
+        <button type="button" data-tipo="" aria-pressed="true">Todas</button>
+        <button type="button" data-tipo="Estágio" aria-pressed="false">Estágio</button>
+        <button type="button" data-tipo="Efetivo" aria-pressed="false">Efetivo</button>
+      </div>
+      <div class="campo campo-cidade">
+        <label for="cidade" class="sr-only">Cidade</label>
+        <select id="cidade">
+          <option value="">Todas as cidades</option>
+        </select>
+        <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <p class="contagem-filtro" id="contagem-filtro" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <section class="conteudo lista" id="lista" aria-label="Vagas abertas">
+    <p class="carregando">Carregando vagas…</p>
+  </section>
+
+  <div class="conteudo">
+    <section class="chamada" id="contato" aria-labelledby="titulo-contato">
+      <div>
+        <h2 id="titulo-contato">Tem vaga de TI na região?</h2>
+        <p>Preencha o formulário com os dados da vaga. Se preferir, mande pelo Direct do Instagram ou para <a href="mailto:sudoestevagaspr@gmail.com">sudoestevagaspr@gmail.com</a>.</p>
+      </div>
+      <a class="botao botao-cheio" href="https://docs.google.com/forms/d/e/1FAIpQLSdrJC9svuXizVMNhkHapBApEBNYe-bqqFJYwQx15sDE28wVZw/viewform" target="_blank" rel="noopener noreferrer">Enviar vaga</a>
+    </section>
+  </div>
+</main>
+
+<footer class="rodape">
+  <div class="conteudo">
+    <div>
+      <p>Não somos agência de empregos e não recebemos currículos. As vagas vêm de fontes públicas e oficiais: confira sempre na fonte.</p>
+      <p>Tem vaga de TI? Envie pelo <a href="https://docs.google.com/forms/d/e/1FAIpQLSdrJC9svuXizVMNhkHapBApEBNYe-bqqFJYwQx15sDE28wVZw/viewform" target="_blank" rel="noopener noreferrer">formulário</a>, pelo <a href="https://ig.me/m/sudoestetechpr" target="_blank" rel="noopener noreferrer">Direct</a> ou pelo e-mail <a href="mailto:sudoestevagaspr@gmail.com">sudoestevagaspr@gmail.com</a></p>
+    </div>
+    <p>Sudoeste Tech · <a href="https://www.instagram.com/sudoestetechpr/" target="_blank" rel="noopener noreferrer">@sudoestetechpr</a></p>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/planilha.js"></script>
+<script src="js/lista.js"></script>
+</body>
+</html>
