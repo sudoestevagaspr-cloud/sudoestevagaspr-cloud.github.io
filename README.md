@@ -60,7 +60,7 @@ A ordem das colunas pode mudar, mas **os nomes da primeira linha precisam ser ex
 | Coluna | O que colocar | Exemplo |
 |---|---|---|
 | `id` | Identificador do link da vaga: minúsculas, sem acento, com hífens. **Não mude depois de divulgar**, senão o link antigo para de funcionar. Se ficar vazio, o site cria um a partir do cargo e da empresa | `viasoft-analista-ti-cloud-jr` |
-| `status` | `Aberta` ou `Encerrada` | `Aberta` |
+| `status` | `Aberta`, `Pendente` ou `Encerrada`. Só `Aberta` aparece no site. Se o Apps Script do formulário estiver instalado, a linha muda sozinha de aba: `Aberta` fica em "vagas" (a única publicada), `Pendente` vai para "pendentes" e `Encerrada` vai para "encerradas" | `Aberta` |
 | `tipo` | `Estágio` ou `Efetivo` (usado no filtro) | `Efetivo` |
 | `cargo` | Nome da vaga. **Obrigatório**: linha sem cargo não aparece | `Analista de TI Cloud Jr.` |
 | `empresa` | Nome da empresa (ou "via CIUNEM" quando é intermediada) | `Viasoft` |
@@ -75,7 +75,7 @@ A ordem das colunas pode mudar, mas **os nomes da primeira linha precisam ser ex
 | `requisitos` | Itens separados por `;`. Viram tópicos em "Quem pode se candidatar" | `Cursando ADS;Inglês básico` |
 | `beneficios` | Itens separados por `;`. Viram tópicos em "Benefícios" | `VA;VT;Plano de saúde` |
 | `como_se_candidatar` | Passos separados por `;`. Viram passos numerados | `Cadastre-se no site;Envie o currículo` |
-| `link_candidatura` | Link oficial da vaga (começa com `https://`) | `https://empresa.gupy.io/jobs/123` |
+| `link_candidatura` | Link oficial da vaga (começa com `https://`). O site tira sozinho os códigos de rastreamento que vêm junto ao copiar do Instagram ou Facebook (`fbclid`, `utm_...`) | `https://empresa.gupy.io/jobs/123` |
 | `prazo` | Último dia de inscrição, `dd/mm/aaaa`. A vaga some sozinha no dia seguinte | `06/12/2026` |
 | `fonte` | De onde veio a vaga | `Vagas da Viasoft (Gupy)` |
 | `publicada_em` | Quando a empresa publicou, `dd/mm/aaaa` | `07/10/2026` |

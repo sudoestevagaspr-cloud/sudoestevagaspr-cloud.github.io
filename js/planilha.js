@@ -101,14 +101,24 @@ function criarId(texto) {
   return normalizar(texto).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 }
 
+// Parâmetros de rastreamento que vêm junto quando o link é copiado do
+// Instagram, Facebook, Google etc. Não mudam a página da vaga, só dizem
+// a essas empresas de onde a pessoa veio. O site tira antes de mostrar.
+var PARAMETROS_RASTREIO = /^(fbclid|gclid|gbraid|wbraid|dclid|msclkid|igshid|igsh|mc_cid|mc_eid|utm_[a-z_]+)$/i;
+
 // Só aceita links http/https, para ninguém colocar "javascript:" na planilha.
+// Também remove os parâmetros de rastreamento (veja acima).
 function linkSeguro(url) {
   url = String(url || "").trim();
   if (!url) return "";
   if (/^www\./i.test(url)) url = "https://" + url;
   try {
     var u = new URL(url);
-    return (u.protocol === "https:" || u.protocol === "http:") ? u.href : "";
+    if (u.protocol !== "https:" && u.protocol !== "http:") return "";
+    Array.from(u.searchParams.keys()).forEach(function (nome) {
+      if (PARAMETROS_RASTREIO.test(nome)) u.searchParams.delete(nome);
+    });
+    return u.href;
   } catch (e) {
     return "";
   }
