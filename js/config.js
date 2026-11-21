@@ -7,7 +7,7 @@
 // Enquanto estiver vazio, o site mostra as vagas do arquivo modelo-vagas.csv
 // deste repositório (útil para testar antes de publicar a planilha).
 var CONFIG = {
-  URL_PLANILHA: "",
+  URL_PLANILHA: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhnIBInyx3i1LED3Je6bXMe-nK6b0jLit7oflqqykms7S5fB6XbKld3-0pEZ8uIe7GJJj-tZHnZW1g/pub?gid=208015752&single=true&output=csv",
 
   INSTAGRAM: "https://www.instagram.com/sudoestetechpr/",
   DIRECT: "https://ig.me/m/sudoestetechpr",
