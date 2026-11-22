@@ -35,18 +35,21 @@ Google Sheets  --(publicada na web como CSV)-->  site no Cloudflare Pages
 | `js/lista.js` | Monta a lista, os filtros (tipo, cidade ou remota), a ordenação e a busca |
 | `js/vaga.js` | Monta a página de uma vaga e os botões |
 | `js/contador.js` | Contador anônimo de visitas e cliques em "se candidatar" (GoatCounter, seção 7) |
-| `js/redirecionar.js` | Manda quem abre o endereço antigo do GitHub para sudoestetech.com.br (seção 5.7) |
+| `js/redirecionar.js` | Manda quem abre o endereço antigo do GitHub ou o `www` para sudoestetech.com.br (seção 5.7) |
+| `404.html` | Página "não encontrada" para endereços que não existem |
+| `_headers` | Cabeçalhos de segurança do Cloudflare Pages (seção 5.8) |
+| `robots.txt` e `sitemap.xml` | Dizem ao Google o que pode ler e qual é o endereço do site |
 | `css/estilo.css` | Visual do site (cores, tamanhos, versão para celular e computador) |
 | `img/` | Logo, favicon e `previa.png` (imagem que aparece ao compartilhar o link) |
 | `fontes/` | Fonte Montserrat (licença livre OFL, em `LICENSE-OFL.txt`) |
 | `modelo-vagas.csv` | Planilha modelo com as colunas e as vagas atuais, para importar no Google Sheets |
 
-**Ao mudar um arquivo `.js` ou o `.css`, troque o número `?v=` nos dois HTML.**
-Em `index.html` e `vaga.html` cada arquivo é chamado assim: `js/lista.js?v=20261122`.
+**Ao mudar um arquivo `.js` ou o `.css`, troque o número `?v=` nos HTML.**
+Em `index.html`, `vaga.html` e `404.html` cada arquivo é chamado assim: `js/lista.js?v=20261122`.
 O navegador de quem já visitou guarda os `.js` e o `.css` por até 4 horas. Sem trocar
 o número, a pessoa pode ficar com metade dos arquivos novos e metade velhos, e a lista
 de vagas aparece vazia. Use a data do dia (ex.: `?v=20261205`) e troque em todas as
-linhas dos dois arquivos. Os HTML não ficam guardados, então o número novo chega na hora.
+linhas dos três arquivos. Se mudar duas vezes no mesmo dia, ponha uma letra no fim (ex.: `?v=20261205b`). Os HTML não ficam guardados, então o número novo chega na hora.
 
 ---
 
@@ -223,8 +226,29 @@ na hora para `https://sudoestetech.com.br`, na mesma página (inclusive o link d
 é o `js/redirecionar.js`, carregado no começo do `index.html` e do `vaga.html`. Como o redirecionamento
 acontece antes do contador, as visitas no endereço antigo não são contadas duas vezes.
 
+O mesmo arquivo manda quem abre `https://www.sudoestetech.com.br` para o endereço sem `www`.
+
 Para desligar o endereço antigo de vez: no repositório, **Settings > Pages**, em Source escolha **None**.
 Aí os links antigos param de funcionar (dão erro 404).
+
+### 5.8 Cabeçalhos de segurança (`_headers`)
+
+O arquivo `_headers` diz ao Cloudflare Pages para mandar, junto com cada página, regras que o navegador
+segue para proteger quem visita:
+
+- **Strict-Transport-Security (HSTS):** depois da primeira visita, o navegador só abre o site com `https://`.
+- **X-Frame-Options e frame-ancestors:** nenhum outro site consegue mostrar o nosso dentro de um quadro
+  (evita golpes de "clique escondido").
+- **Content-Security-Policy (CSP):** lista de onde o site pode carregar scripts, estilos, imagens e dados.
+  Se alguém conseguir colocar um script malicioso na página, o navegador não roda nada que venha de fora
+  dessa lista. Hoje a lista tem: o próprio site, a planilha do Google, o GoatCounter e o Cloudflare.
+- **Permissions-Policy:** o site não usa câmera, microfone nem localização, então já bloqueia de vez.
+
+**Atenção:** se um dia o site passar a usar outro serviço (outra fonte, um script de outro endereço,
+um vídeo incorporado), ele precisa entrar no `Content-Security-Policy`, senão o navegador bloqueia.
+Para descobrir, abra o site, aperte F12 e veja a aba Console: o bloqueio aparece em vermelho.
+
+O GitHub Pages ignora esse arquivo; ele só vale no Cloudflare.
 
 ## 6. Testar no seu computador
 

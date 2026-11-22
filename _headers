@@ -1,0 +1,11 @@
+# Cabeçalhos de segurança do Cloudflare Pages (veja o README, seção 5.8).
+# Valem para todas as páginas e arquivos do site.
+# Se um dia o site passar a usar outro serviço (script, fonte, imagem de outro
+# endereço), ele precisa entrar no Content-Security-Policy, senão é bloqueado.
+/*
+  Strict-Transport-Security: max-age=31536000
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://gc.zgo.at https://static.cloudflareinsights.com; connect-src 'self' https://docs.google.com https://*.googleusercontent.com https://sudoestetech.goatcounter.com https://cloudflareinsights.com; img-src 'self' data: https://sudoestetech.goatcounter.com; style-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
