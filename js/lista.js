@@ -1,6 +1,8 @@
 // Página inicial: lista de vagas abertas, filtro por tipo e cidade, e busca.
 
 (function () {
+  contar({ path: "/", title: "Página inicial" });
+
   var areaLista = document.getElementById("lista");
   var resumo = document.getElementById("resumo");
   var contagemFiltro = document.getElementById("contagem-filtro");

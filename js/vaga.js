@@ -41,6 +41,13 @@
       candidatar.target = "_blank";
       candidatar.rel = "noopener noreferrer";
       candidatar.appendChild(icone("externo"));
+      // Conta o clique (só o número, sem saber quem clicou). O link da vaga não muda.
+      var contarClique = function (ev) {
+        if (ev.type === "auxclick" && ev.button !== 1) return; // só botão do meio
+        contar({ path: "candidatar/" + v.id, title: nomeVaga(v), event: true });
+      };
+      candidatar.addEventListener("click", contarClique);
+      candidatar.addEventListener("auxclick", contarClique);
       caixa.appendChild(candidatar);
     }
 
@@ -69,8 +76,13 @@
     return el("p", "fonte", texto.charAt(0).toUpperCase() + texto.slice(1));
   }
 
+  function nomeVaga(v) {
+    return v.cargo + (v.empresa ? " · " + v.empresa : "");
+  }
+
   function mostrar(v) {
-    document.title = v.cargo + (v.empresa ? " · " + v.empresa : "") + " | Sudoeste Tech";
+    document.title = nomeVaga(v) + " | Sudoeste Tech";
+    contar({ path: "/vaga/" + v.id, title: nomeVaga(v) });
 
     var art = el("article", "cartao detalhe");
 
@@ -111,6 +123,7 @@
       if (vaga) {
         mostrar(vaga);
       } else {
+        contar({ path: "/vaga/encerrada", title: "Vaga encerrada ou não encontrada" });
         area.textContent = "";
         area.appendChild(aviso(
           "Esta vaga foi encerrada",
