@@ -41,6 +41,13 @@ Google Sheets  --(publicada na web como CSV)-->  site no Cloudflare Pages
 | `fontes/` | Fonte Montserrat (licença livre OFL, em `LICENSE-OFL.txt`) |
 | `modelo-vagas.csv` | Planilha modelo com as colunas e as vagas atuais, para importar no Google Sheets |
 
+**Ao mudar um arquivo `.js` ou o `.css`, troque o número `?v=` nos dois HTML.**
+Em `index.html` e `vaga.html` cada arquivo é chamado assim: `js/lista.js?v=20261122`.
+O navegador de quem já visitou guarda os `.js` e o `.css` por até 4 horas. Sem trocar
+o número, a pessoa pode ficar com metade dos arquivos novos e metade velhos, e a lista
+de vagas aparece vazia. Use a data do dia (ex.: `?v=20261205`) e troque em todas as
+linhas dos dois arquivos. Os HTML não ficam guardados, então o número novo chega na hora.
+
 ---
 
 ## 1. Criar a planilha
