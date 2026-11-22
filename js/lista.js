@@ -1,4 +1,5 @@
-// Página inicial: lista de vagas abertas, filtro por tipo e cidade, e busca.
+// Página inicial: lista de vagas abertas, filtro por tipo e cidade (ou remota),
+// ordenação e busca.
 
 (function () {
   contar({ path: "/", title: "Página inicial" });
@@ -8,10 +9,12 @@
   var contagemFiltro = document.getElementById("contagem-filtro");
   var campoBusca = document.getElementById("busca");
   var campoCidade = document.getElementById("cidade");
+  var campoOrdem = document.getElementById("ordem");
   var botoesTipo = document.querySelectorAll(".tipos button");
 
   var abertas = [];
   var filtro = { tipo: "", cidade: "", texto: "" };
+  var ordem = "recentes"; // valores do seletor #ordem: recentes, prazo, az, za
 
   // ---------- Card de uma vaga ----------
   function card(v) {
@@ -48,7 +51,9 @@
 
   function passaNoFiltro(v) {
     if (filtro.tipo && normalizar(v.tipo) !== filtro.tipo) return false;
-    if (filtro.cidade && normalizar(v.cidade) !== filtro.cidade) return false;
+    if (filtro.cidade === "remota") {
+      if (!ehRemota(v)) return false;
+    } else if (filtro.cidade && normalizar(v.cidade) !== filtro.cidade) return false;
     if (filtro.texto) {
       var palavras = filtro.texto.split(/\s+/);
       var alvo = v._busca;
@@ -61,7 +66,7 @@
 
   function desenhar() {
     areaLista.textContent = "";
-    var visiveis = abertas.filter(passaNoFiltro);
+    var visiveis = ordenarPor(abertas.filter(passaNoFiltro), ordem);
     var filtrando = filtro.tipo || filtro.cidade || filtro.texto;
 
     if (!abertas.length) {
@@ -102,7 +107,9 @@
   function preencherCidades() {
     var vistas = {};
     abertas.forEach(function (v) {
-      if (v.cidade && !vistas[normalizar(v.cidade)]) vistas[normalizar(v.cidade)] = v.cidade;
+      var chave = normalizar(v.cidade);
+      // "Remoto" escrito na coluna cidade já entra pela opção "Remota".
+      if (v.cidade && !/^remot/.test(chave) && !vistas[chave]) vistas[chave] = v.cidade;
     });
     Object.keys(vistas)
       .sort(function (a, b) { return vistas[a].localeCompare(vistas[b], "pt-BR"); })
@@ -126,6 +133,11 @@
 
   campoCidade.addEventListener("change", function () {
     filtro.cidade = campoCidade.value;
+    desenhar();
+  });
+
+  campoOrdem.addEventListener("change", function () {
+    ordem = campoOrdem.value;
     desenhar();
   });
 

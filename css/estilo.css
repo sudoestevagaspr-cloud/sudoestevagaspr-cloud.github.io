@@ -190,9 +190,19 @@ select:focus-visible {
   pointer-events: none;
 }
 .campo-busca .icone { left: 14px; width: 20px; height: 20px; color: var(--apoio); stroke-width: 2; }
-.campo-cidade .icone { right: 16px; width: 18px; height: 18px; color: var(--ciano); stroke-width: 2.4; }
+.campo-cidade .icone,
+.campo-ordem .icone { right: 16px; width: 18px; height: 18px; color: var(--ciano); stroke-width: 2.4; }
 
 .tipos { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* Cidade e ordenação: uma embaixo da outra no celular pequeno,
+   lado a lado a partir de 560px (assim o texto não fica cortado). */
+.selecoes { display: grid; grid-template-columns: 1fr; gap: 8px; }
+.selecoes .campo { min-width: 0; }
+.selecoes select { text-overflow: ellipsis; }
+@media (min-width: 560px) {
+  .selecoes { grid-template-columns: 1fr 1fr; }
+}
 
 .tipos button {
   min-height: 44px;
@@ -495,7 +505,7 @@ select:focus-visible {
   .resumo { font-size: 16px; }
   .filtros { flex-direction: row; align-items: center; flex-wrap: wrap; }
   .campo-busca { flex: 1 1 360px; }
-  .campo-cidade { flex: 0 0 280px; }
+  .selecoes { flex: 0 0 440px; }
   .tipos { flex-wrap: nowrap; }
   .contagem-filtro { flex-basis: 100%; }
   .lista { grid-template-columns: repeat(3, minmax(0, 1fr)); padding-top: 24px; }

@@ -32,7 +32,7 @@ Google Sheets  --(publicada na web como CSV)-->  site no Cloudflare Pages
 | `vaga.html` | Página de uma vaga. O link fica `vaga.html?id=identificador-da-vaga` |
 | `js/config.js` | **O único arquivo que você precisa editar:** link da planilha e contatos |
 | `js/planilha.js` | Lê o CSV e aplica as regras (quais vagas aparecem, ordem, selo "Nova") |
-| `js/lista.js` | Monta a lista, os filtros e a busca |
+| `js/lista.js` | Monta a lista, os filtros (tipo, cidade ou remota), a ordenação e a busca |
 | `js/vaga.js` | Monta a página de uma vaga e os botões |
 | `js/contador.js` | Contador anônimo de visitas e cliques em "se candidatar" (GoatCounter, seção 7) |
 | `js/redirecionar.js` | Manda quem abre o endereço antigo do GitHub para sudoestetech.com.br (seção 5.7) |
@@ -69,7 +69,7 @@ A ordem das colunas pode mudar, mas **os nomes da primeira linha precisam ser ex
 | `empresa` | Nome da empresa (ou "via CIUNEM" quando é intermediada) | `Viasoft` |
 | `cidade` | Só o nome da cidade. Escreva sempre igual, porque o filtro usa este texto | `Pato Branco` |
 | `contrato` | CLT, PJ, Estágio não obrigatório... | `CLT` |
-| `modalidade` | Presencial, Híbrido ou Remoto | `Presencial` |
+| `modalidade` | Presencial, Híbrido ou Remoto. Com `Remoto` a vaga aparece na opção "Remota" do filtro de cidade (Híbrido não entra) | `Presencial` |
 | `pcd` | `Sim` mostra o chip "Também para PcD". `Não` ou vazio não mostra nada | `Sim` |
 | `etiquetas` | Chips extras, separados por `;` | `ADS;Período integral` |
 | `salario` | Texto livre, aparece em amarelo | `Bolsa de R$ 950/mês + R$ 50 de auxílio-transporte` |
