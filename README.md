@@ -35,6 +35,7 @@ Google Sheets  --(publicada na web como CSV)-->  site no Cloudflare Pages
 | `js/lista.js` | Monta a lista, os filtros e a busca |
 | `js/vaga.js` | Monta a página de uma vaga e os botões |
 | `js/contador.js` | Contador anônimo de visitas e cliques em "se candidatar" (GoatCounter, seção 7) |
+| `js/redirecionar.js` | Manda quem abre o endereço antigo do GitHub para sudoestetech.com.br (seção 5.7) |
 | `css/estilo.css` | Visual do site (cores, tamanhos, versão para celular e computador) |
 | `img/` | Logo, favicon e `previa.png` (imagem que aparece ao compartilhar o link) |
 | `fontes/` | Fonte Montserrat (licença livre OFL, em `LICENSE-OFL.txt`) |
@@ -194,7 +195,7 @@ Copie o endereço do site (`https://sudoestetech.com.br`) e coloque na bio do In
 ### 5.6 Domínio próprio no Cloudflare Pages
 
 Desde novembro de 2026 o site fica no **Cloudflare Pages** (grátis), no domínio **sudoestetech.com.br**
-comprado no Registro.br. O GitHub Pages continua ligado como reserva.
+comprado no Registro.br. O endereço antigo do GitHub manda as visitas para o domínio novo (seção 5.7).
 
 - **Conta:** Cloudflare com o e-mail da página. Projeto Pages: `sudoestetech`
   (endereço reserva: `https://sudoestetech.pages.dev`).
@@ -207,6 +208,16 @@ comprado no Registro.br. O GitHub Pages continua ligado como reserva.
   vêm do Registro.br e foram mantidos). Isso evita que alguém mande e-mail falso em nome do domínio.
 - **Renovação:** o domínio `.com.br` é pago por ano no Registro.br. Se não renovar, o site sai do ar
   nesse endereço (o `sudoestetech.pages.dev` continua funcionando).
+
+### 5.7 Endereço antigo do GitHub
+
+O GitHub Pages continua ligado, mas quem abre `https://sudoestevagaspr-cloud.github.io` é mandado
+na hora para `https://sudoestetech.com.br`, na mesma página (inclusive o link de uma vaga). Quem faz isso
+é o `js/redirecionar.js`, carregado no começo do `index.html` e do `vaga.html`. Como o redirecionamento
+acontece antes do contador, as visitas no endereço antigo não são contadas duas vezes.
+
+Para desligar o endereço antigo de vez: no repositório, **Settings > Pages**, em Source escolha **None**.
+Aí os links antigos param de funcionar (dão erro 404).
 
 ## 6. Testar no seu computador
 
