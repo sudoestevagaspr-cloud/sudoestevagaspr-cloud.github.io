@@ -15,6 +15,11 @@ var CONFIG = {
   FORMULARIO_EMPRESAS: "https://docs.google.com/forms/d/e/1FAIpQLSdrJC9svuXizVMNhkHapBApEBNYe-bqqFJYwQx15sDE28wVZw/viewform",
   EMAIL: "sudoestevagaspr@gmail.com",
 
+  // Código do site no GoatCounter (contador de visitas e de cliques em "se candidatar").
+  // É a primeira parte do endereço do painel: em https://sudoestetech.goatcounter.com
+  // o código é "sudoestetech". Deixe vazio ("") para desligar o contador.
+  GOATCOUNTER: "",
+
   // Por quantos dias a vaga mostra o selo "Nova" depois de adicionada.
   DIAS_NOVA: 7
 };
