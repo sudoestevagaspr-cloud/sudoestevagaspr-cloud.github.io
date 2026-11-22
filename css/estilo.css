@@ -334,7 +334,7 @@ select:focus-visible {
   border-radius: var(--raio);
   padding: 22px 20px;
 }
-.aviso h2 { margin: 0 0 8px; font-size: 18px; font-weight: 800; color: var(--branco); }
+.aviso h1, .aviso h2 { margin: 0 0 8px; font-size: 18px; font-weight: 800; color: var(--branco); }
 .aviso p { margin: 0 0 12px; font-size: 15px; color: var(--apoio); }
 .aviso p:last-child { margin-bottom: 0; }
 
