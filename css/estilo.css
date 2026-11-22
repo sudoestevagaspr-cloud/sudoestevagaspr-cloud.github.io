@@ -338,6 +338,12 @@ select:focus-visible {
 .aviso p { margin: 0 0 12px; font-size: 15px; color: var(--apoio); }
 .aviso p:last-child { margin-bottom: 0; }
 
+/* Textos da planilha sem espaço (links, e-mails, palavras enormes) quebram a linha
+   em vez de empurrar a página para o lado no celular. */
+.cartao, .aviso { overflow-wrap: anywhere; }
+
+.sem-js { color: var(--apoio); font-size: 15px; padding: 12px 0; }
+
 .carregando { color: var(--apoio); font-size: 14px; padding: 12px 0; grid-column: 1 / -1; }
 
 /* ---------- Chamada para empresas ---------- */
