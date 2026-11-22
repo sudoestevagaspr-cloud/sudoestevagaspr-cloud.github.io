@@ -18,7 +18,7 @@ Google Sheets  --(publicada na web como CSV)-->  site no Cloudflare Pages
 - **Grátis:** Cloudflare Pages e Google Sheets não cobram (só o domínio no Registro.br é pago, por ano). Não tem servidor, banco de dados nem login.
 - **Sem build:** é HTML, CSS e JavaScript puro. O que está no repositório é exatamente o que vai para o ar.
 - **Sem cookies e sem rastreadores:** a fonte Montserrat está dentro do próprio site (pasta `fontes/`),
-  então nem o Google Fonts é chamado. A única coisa externa que o site busca é a planilha.
+  então nem o Google Fonts é chamado. Além da planilha, o site só chama o contador anônimo GoatCounter (sem cookies, seção 7).
 
 > **Atenção: a planilha publicada é pública.** Qualquer pessoa com o link do CSV consegue ler tudo
 > o que está nela, inclusive colunas que o site não mostra. Nunca coloque na planilha dados pessoais,
