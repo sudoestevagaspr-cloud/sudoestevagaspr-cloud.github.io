@@ -66,12 +66,25 @@
         <button type="button" data-tipo="Estágio" aria-pressed="false">Estágio</button>
         <button type="button" data-tipo="Efetivo" aria-pressed="false">Efetivo</button>
       </div>
-      <div class="campo campo-cidade">
-        <label for="cidade" class="sr-only">Cidade</label>
-        <select id="cidade">
-          <option value="">Todas as cidades</option>
-        </select>
-        <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      <div class="selecoes">
+        <div class="campo campo-cidade">
+          <label for="cidade" class="sr-only">Cidade</label>
+          <select id="cidade">
+            <option value="">Todas as cidades</option>
+            <option value="remota">Remota</option>
+          </select>
+          <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+        <div class="campo campo-ordem">
+          <label for="ordem" class="sr-only">Ordenar vagas</label>
+          <select id="ordem">
+            <option value="recentes">Mais recentes</option>
+            <option value="prazo">Prazo mais próximo</option>
+            <option value="az">Cargo de A a Z</option>
+            <option value="za">Cargo de Z a A</option>
+          </select>
+          <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
       </div>
       <p class="contagem-filtro" id="contagem-filtro" aria-live="polite"></p>
     </form>

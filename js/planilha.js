@@ -165,6 +165,36 @@ function ordenar(vagas) {
   });
 }
 
+// Vaga remota: a coluna modalidade diz "Remoto"/"Remota" (o formulário
+// grava "Modelo de trabalho" nela). Também vale se a cidade for "Remoto".
+// Híbrido não conta, porque a pessoa precisa ir à empresa às vezes.
+function ehRemota(v) {
+  return /^remot/.test(normalizar(v.modalidade)) || /^remot/.test(normalizar(v.cidade));
+}
+
+// Outras ordens escolhidas no seletor da página inicial.
+// "prazo": prazo mais próximo primeiro; vagas sem prazo vão para o fim.
+// "az" / "za": pelo nome do cargo, sem ligar para acento e maiúsculas.
+// Em qualquer empate, vale a ordem "mais recentes".
+function ordenarPor(vagas, modo) {
+  var base = ordenar(vagas);
+  if (modo !== "prazo" && modo !== "az" && modo !== "za") return base;
+  var posicao = new Map();
+  base.forEach(function (v, i) { posicao.set(v, i); });
+  return base.sort(function (a, b) {
+    var r = 0;
+    if (modo === "prazo") {
+      var pa = a.dataPrazo ? a.dataPrazo.getTime() : Infinity;
+      var pb = b.dataPrazo ? b.dataPrazo.getTime() : Infinity;
+      r = pa === pb ? 0 : (pa < pb ? -1 : 1);
+    } else {
+      r = a.cargo.localeCompare(b.cargo, "pt-BR", { sensitivity: "base", numeric: true });
+      if (modo === "za") r = -r;
+    }
+    return r || posicao.get(a) - posicao.get(b);
+  });
+}
+
 // Busca a planilha e devolve TODAS as vagas preparadas (abertas e encerradas).
 function carregarVagas() {
   var url = CONFIG.URL_PLANILHA || "modelo-vagas.csv";
