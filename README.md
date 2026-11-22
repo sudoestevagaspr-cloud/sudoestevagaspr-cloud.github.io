@@ -9,12 +9,13 @@ edita a planilha (dá para fazer pelo celular). Não precisa mexer em código.
 ## Como funciona
 
 ```
-Google Sheets  --(publicada na web como CSV)-->  site no GitHub Pages
- (você edita)                                    (o navegador de quem visita
+Google Sheets  --(publicada na web como CSV)-->  site no Cloudflare Pages
+ (você edita)                                    (https://sudoestetech.com.br;
+                                                  o navegador de quem visita
                                                   baixa o CSV e monta a página)
 ```
 
-- **Grátis:** GitHub Pages e Google Sheets não cobram. Não tem servidor, banco de dados nem login.
+- **Grátis:** Cloudflare Pages e Google Sheets não cobram (só o domínio no Registro.br é pago, por ano). Não tem servidor, banco de dados nem login.
 - **Sem build:** é HTML, CSS e JavaScript puro. O que está no repositório é exatamente o que vai para o ar.
 - **Sem cookies e sem rastreadores:** a fonte Montserrat está dentro do próprio site (pasta `fontes/`),
   então nem o Google Fonts é chamado. A única coisa externa que o site busca é a planilha.
@@ -171,12 +172,13 @@ Os commits deste projeto já estão com o nome "Sudoeste Tech" e o e-mail da pá
 
 ### 5.4 Ajustar o endereço da prévia do WhatsApp
 
-Nos arquivos `index.html` e `vaga.html`, troque as duas ocorrências de `https://ENDERECO-DO-SITE/`
-pelo endereço real, terminando com `/`. Exemplo:
+Nos arquivos `index.html` e `vaga.html`, o `og:url` e o `og:image` usam o endereço completo do site,
+terminando com `/`. Hoje é o domínio próprio:
 ```html
-<meta property="og:url" content="https://sudoestetechpr.github.io/">
-<meta property="og:image" content="https://sudoestetechpr.github.io/img/previa.png">
+<meta property="og:url" content="https://sudoestetech.com.br/">
+<meta property="og:image" content="https://sudoestetech.com.br/img/previa.png">
 ```
+Se o endereço do site mudar, troque nos dois arquivos.
 O WhatsApp só mostra a imagem se o endereço estiver completo.
 
 **Limite da prévia:** o WhatsApp não roda JavaScript ao montar a prévia, então todo link do site
@@ -186,7 +188,24 @@ a prévia por um tempo: se você mudar a imagem, pode demorar para atualizar.
 
 ### 5.5 Colocar na bio
 
-Copie o endereço do site e coloque na bio do Instagram (ou dentro do conectai.bio).
+Copie o endereço do site (`https://sudoestetech.com.br`) e coloque na bio do Instagram (ou dentro do conectai.bio).
+
+### 5.6 Domínio próprio no Cloudflare Pages
+
+Desde novembro de 2026 o site fica no **Cloudflare Pages** (grátis), no domínio **sudoestetech.com.br**
+comprado no Registro.br. O GitHub Pages continua ligado como reserva.
+
+- **Conta:** Cloudflare com o e-mail da página. Projeto Pages: `sudoestetech`
+  (endereço reserva: `https://sudoestetech.pages.dev`).
+- **Publicação automática:** o projeto está ligado à branch `main` deste repositório, sem comando de
+  build e com a pasta `/`. Cada mudança na `main` vai para o ar sozinha em cerca de 1 minuto.
+- **DNS:** no Registro.br, os servidores DNS do domínio são os do Cloudflare
+  (`agustin.ns.cloudflare.com` e `amber.ns.cloudflare.com`). Os registros DNS são editados no painel
+  do Cloudflare, não no Registro.br.
+- **E-mail:** o domínio não recebe nem envia e-mail (registros `MX .`, `v=spf1 -all` e DMARC `reject`
+  vêm do Registro.br e foram mantidos). Isso evita que alguém mande e-mail falso em nome do domínio.
+- **Renovação:** o domínio `.com.br` é pago por ano no Registro.br. Se não renovar, o site sai do ar
+  nesse endereço (o `sudoestetech.pages.dev` continua funcionando).
 
 ## 6. Testar no seu computador
 
