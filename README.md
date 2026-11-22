@@ -263,7 +263,7 @@ Dica: cliques divididos por visitas da vaga mostram quanto a vaga interessou.
 
 Você abre o site muitas vezes para conferir as vagas, e isso entraria na contagem. Para o seu navegador
 parar de contar, abra uma vez o endereço do site com `#toggle-goatcounter` no final, por exemplo
-`https://sudoestevagaspr-cloud.github.io/#toggle-goatcounter`. Aparece um aviso dizendo que a contagem
+`https://sudoestetech.com.br/#toggle-goatcounter`. Aparece um aviso dizendo que a contagem
 foi desligada (`DISABLED`) neste navegador. Faça isso em cada navegador e celular que você usa e em cada
 endereço do site (o do GitHub e o `sudoestetech.com.br` contam separado). Abrir o mesmo endereço de novo
 liga a contagem outra vez (`ENABLED`).
