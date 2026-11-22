@@ -34,6 +34,7 @@ Google Sheets  --(publicada na web como CSV)-->  site no Cloudflare Pages
 | `js/planilha.js` | Lê o CSV e aplica as regras (quais vagas aparecem, ordem, selo "Nova") |
 | `js/lista.js` | Monta a lista, os filtros e a busca |
 | `js/vaga.js` | Monta a página de uma vaga e os botões |
+| `js/contador.js` | Contador anônimo de visitas e cliques em "se candidatar" (GoatCounter, seção 7) |
 | `css/estilo.css` | Visual do site (cores, tamanhos, versão para celular e computador) |
 | `img/` | Logo, favicon e `previa.png` (imagem que aparece ao compartilhar o link) |
 | `fontes/` | Fonte Montserrat (licença livre OFL, em `LICENSE-OFL.txt`) |
@@ -219,11 +220,64 @@ python -m http.server 8000
 Abra `http://localhost:8000`. Para ver como fica no celular, use o modo de dispositivo do navegador
 (F12 e depois o ícone de celular, ou Ctrl+Shift+M).
 
+## 7. Contador de visitas e de cliques (GoatCounter)
+
+O site pode contar, de forma anônima, quantas vezes cada página foi vista e quantas vezes o botão
+**"Ver vaga e se candidatar"** de cada vaga foi clicado. Quem faz isso é o
+[GoatCounter](https://www.goatcounter.com), grátis para sites sem fins lucrativos.
+
+**O que ele mostra:** números. Ex.: "a vaga Estágio em TI · CIUNEM teve 40 visitas e 12 cliques em
+se candidatar". **O que ele não mostra:** quem clicou. Ele não usa cookies, não guarda IP, nome nem
+qualquer dado que identifique a pessoa. Isso é de propósito: é o que deixa o site dentro da LGPD sem
+precisar de aviso de cookies.
+
+### 7.1 Criar a conta (uma vez)
+
+A conta já existe: o painel fica em <https://sudoestetech.goatcounter.com> (login com o e-mail da página).
+Se um dia precisar criar outra:
+
+1. Entre em <https://www.goatcounter.com/signup> com o e-mail da página.
+2. Em **Code**, escolha o código do site, por exemplo `sudoestetech`. O painel vai ficar em
+   `https://sudoestetech.goatcounter.com`.
+3. Termine o cadastro e confirme o e-mail.
+
+### 7.2 Ligar no site
+
+Em `js/config.js`, coloque o código entre as aspas:
+```js
+GOATCOUNTER: "sudoestetech",
+```
+Deixando vazio (`""`), o contador fica desligado e o site não chama nada do GoatCounter.
+
+### 7.3 Ler os números
+
+No painel do GoatCounter:
+- `/` é a página inicial.
+- `/vaga/identificador-da-vaga` são as visitas de cada vaga (o título mostra cargo e empresa).
+- `/vaga/encerrada` conta quem abriu um link de vaga que já saiu do ar.
+- Em **Events**, `candidatar/identificador-da-vaga` são os cliques no botão de candidatura.
+
+Dica: cliques divididos por visitas da vaga mostram quanto a vaga interessou.
+
+### 7.4 Não contar as suas próprias visitas
+
+Você abre o site muitas vezes para conferir as vagas, e isso entraria na contagem. Para o seu navegador
+parar de contar, abra uma vez o endereço do site com `#toggle-goatcounter` no final, por exemplo
+`https://sudoestevagaspr-cloud.github.io/#toggle-goatcounter`. Aparece um aviso dizendo que a contagem
+foi desligada (`DISABLED`) neste navegador. Faça isso em cada navegador e celular que você usa e em cada
+endereço do site (o do GitHub e o `sudoestetech.com.br` contam separado). Abrir o mesmo endereço de novo
+liga a contagem outra vez (`ENABLED`).
+
+Os números são uma estimativa: bloqueadores de anúncio podem impedir a contagem, e visitas feitas no
+seu computador pelo `localhost` não contam. O link de candidatura continua o mesmo, sem códigos de
+rastreamento: a contagem acontece no site, não no link.
+
 ## Privacidade (LGPD)
 
 - O site não tem formulário próprio, não recebe currículo e não coleta nenhum dado de quem visita.
 - Os links "Tem vaga? Envie aqui" e "Enviar vaga" levam ao formulário do Google Forms para empresas. As respostas ficam na conta Google da página: peça só dados da vaga e um contato da empresa, nunca dados de candidatos.
 - Para trocar o link do formulário, procure por `docs.google.com/forms` no `index.html` e no `vaga.html`.
 - Sem cookies, sem Google Analytics, sem pixel. A fonte é servida pelo próprio site.
+- O contador (GoatCounter, seção 7) só conta números de visitas e cliques. Não usa cookies e não guarda nada que identifique quem visita.
 - Não usamos logo de empresas nem contato pessoal de recrutadores: só o link e o contato oficiais da vaga.
 - Todo texto da planilha entra na página como texto, nunca como código. Links de candidatura só são aceitos se começarem com `http://` ou `https://`.
