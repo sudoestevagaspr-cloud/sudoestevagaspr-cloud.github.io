@@ -214,6 +214,9 @@ precisar de aviso de cookies.
 
 ### 7.1 Criar a conta (uma vez)
 
+A conta já existe: o painel fica em <https://sudoestetech.goatcounter.com> (login com o e-mail da página).
+Se um dia precisar criar outra:
+
 1. Entre em <https://www.goatcounter.com/signup> com o e-mail da página.
 2. Em **Code**, escolha o código do site, por exemplo `sudoestetech`. O painel vai ficar em
    `https://sudoestetech.goatcounter.com`.
@@ -236,6 +239,15 @@ No painel do GoatCounter:
 - Em **Events**, `candidatar/identificador-da-vaga` são os cliques no botão de candidatura.
 
 Dica: cliques divididos por visitas da vaga mostram quanto a vaga interessou.
+
+### 7.4 Não contar as suas próprias visitas
+
+Você abre o site muitas vezes para conferir as vagas, e isso entraria na contagem. Para o seu navegador
+parar de contar, abra uma vez o endereço do site com `#toggle-goatcounter` no final, por exemplo
+`https://sudoestevagaspr-cloud.github.io/#toggle-goatcounter`. Aparece um aviso dizendo que a contagem
+foi desligada (`DISABLED`) neste navegador. Faça isso em cada navegador e celular que você usa e em cada
+endereço do site (o do GitHub e o `sudoestetech.com.br` contam separado). Abrir o mesmo endereço de novo
+liga a contagem outra vez (`ENABLED`).
 
 Os números são uma estimativa: bloqueadores de anúncio podem impedir a contagem, e visitas feitas no
 seu computador pelo `localhost` não contam. O link de candidatura continua o mesmo, sem códigos de
