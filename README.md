@@ -104,6 +104,11 @@ A ordem das colunas pode mudar, mas **os nomes da primeira linha precisam ser ex
 - Linha amarela do card: o `salario`. Se estiver vazio, mostra "Inscrições até" com o `prazo`.
 - "Atualizado em", no topo, é o `conferida_em` mais recente entre as vagas abertas.
 - Se você usar `;` dentro de um item, ele vai ser dividido em dois. Use vírgula dentro dos itens.
+- Datas: o certo é `dd/mm/aaaa`. O site também entende `6/12/26`, `06-12-2026` e `2026-12-06`.
+  Uma data que não dá para ler (ex.: `06/12`, sem o ano) é ignorada: se for o `prazo`, a vaga **não sai sozinha**.
+- Cada vaga aberta precisa de um `id` diferente. Se repetir, o link de uma abre a outra
+  (o site avisa no console do navegador, F12).
+- Não mude o `id` de uma vaga já divulgada: o link antigo passa a mostrar "Esta vaga foi encerrada".
 
 ## 2. Adicionar uma vaga
 

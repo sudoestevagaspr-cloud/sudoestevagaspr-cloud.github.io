@@ -76,12 +76,23 @@ function itens(texto) {
   return String(texto || "").split(";").map(function (t) { return t.trim(); }).filter(Boolean);
 }
 
-// "dd/mm/aaaa" -> Date (meia-noite, horário local). Retorna null se inválida.
+// Data da planilha -> Date (meia-noite, horário local). Retorna null se inválida.
+// O certo é "dd/mm/aaaa", mas também aceita erros comuns de digitação:
+// "6/12/26", "06-12-2026", "06.12.2026", "2026-12-06" e hora no fim ("06/12/2026 18:00").
+// Sem isso, um prazo digitado diferente faria a vaga nunca sair do ar.
 function lerData(texto) {
-  var m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(String(texto || "").trim());
-  if (!m) return null;
-  var d = new Date(+m[3], +m[2] - 1, +m[1]);
-  if (d.getMonth() !== +m[2] - 1) return null; // ex.: 31/02
+  texto = String(texto || "").trim();
+  var dia, mes, ano;
+  var m = /^(\d{4})-(\d{1,2})-(\d{1,2})(?:\D|$)/.exec(texto);
+  if (m) { ano = +m[1]; mes = +m[2]; dia = +m[3]; }
+  else {
+    m = /^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2}|\d{4})(?:\D|$)/.exec(texto);
+    if (!m) return null;
+    dia = +m[1]; mes = +m[2]; ano = +m[3];
+    if (ano < 100) ano += 2000;
+  }
+  var d = new Date(ano, mes - 1, dia);
+  if (d.getMonth() !== mes - 1 || d.getDate() !== dia) return null; // ex.: 31/02
   return d;
 }
 
@@ -198,7 +209,15 @@ function ordenarPor(vagas, modo) {
 // Busca a planilha e devolve TODAS as vagas preparadas (abertas e encerradas).
 function carregarVagas() {
   var url = CONFIG.URL_PLANILHA || "modelo-vagas.csv";
-  return fetch(url, { cache: "no-store" })
+  // Se a planilha não responder em 20 segundos, desiste e mostra o aviso de erro
+  // (sem isso, "Carregando vagas…" podia ficar na tela para sempre).
+  var opcoes = { cache: "no-store" };
+  if (window.AbortController) {
+    var controle = new AbortController();
+    setTimeout(function () { controle.abort(); }, 20000);
+    opcoes.signal = controle.signal;
+  }
+  return fetch(url, opcoes)
     .then(function (resposta) {
       if (!resposta.ok) throw new Error("Planilha respondeu " + resposta.status);
       return resposta.text();
@@ -208,8 +227,19 @@ function carregarVagas() {
       if (/^\s*<(!doctype|html)/i.test(texto)) throw new Error("O link não devolveu um CSV");
       var vagas = linhasParaObjetos(lerCSV(texto)).map(prepararVaga);
       if (vagas.length && !("cargo" in vagas[0])) throw new Error("A planilha não tem a coluna cargo");
+      avisarIdsRepetidos(vagas);
       return vagas;
     });
+}
+
+// Duas vagas abertas com o mesmo id: o link de uma delas abre a outra.
+// Não quebra o site, só avisa no console (F12) para corrigir na planilha.
+function avisarIdsRepetidos(vagas) {
+  var vistos = {};
+  vagas.filter(estaAberta).forEach(function (v) {
+    if (vistos[v.id]) console.warn("Id repetido na planilha: " + v.id + " (troque o id de uma das vagas)");
+    vistos[v.id] = true;
+  });
 }
 
 // ---------------------------------------------------------------
